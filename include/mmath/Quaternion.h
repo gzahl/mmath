@@ -81,20 +81,20 @@ constexpr Quaternion<T>::Quaternion(T x, T y, T z, T w)
 template <typename T>
 constexpr Vector<3, T> Quaternion<T>::ToEulerXYZ()
 {
-    T ex, ey, ez;
+    T ex = 0.0, ey = 0.0, ez = 0.0;
 
-    T x2 = this->X + this->X;
-    T y2 = this->Y + this->Y;
-    T z2 = this->Z + this->Z;
-    T xx = this->X * x2;
-    T xy = this->X * y2;
-    T xz = this->X * z2;
-    T yy = this->Y * y2;
-    T yz = this->Y * z2;
-    T zz = this->Z * z2;
-    T wx = this->W * x2;
-    T wy = this->W * y2;
-    T wz = this->W * z2;
+    T x2 = this->x + this->x;
+    T y2 = this->y + this->y;
+    T z2 = this->z + this->z;
+    T xx = this->x * x2;
+    T xy = this->x * y2;
+    T xz = this->x * z2;
+    T yy = this->y * y2;
+    T yz = this->y * z2;
+    T zz = this->y * z2;
+    T wx = this->w * x2;
+    T wy = this->w * y2;
+    T wz = this->w * z2;
 
     T sx = 1;
     T sy = 1;
