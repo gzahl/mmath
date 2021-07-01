@@ -48,7 +48,7 @@ public:
     constexpr Vector(Vector const &v) = default;
     constexpr Vector(T x, T y, T z);
 
-    static constexpr size_t length() { return 3; }
+    static constexpr std::size_t length() { return 3; }
     constexpr T &operator[](uint8_t i);
     constexpr T const &operator[](uint8_t i) const;
     constexpr T *data();
