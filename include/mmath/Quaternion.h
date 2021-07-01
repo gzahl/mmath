@@ -91,7 +91,7 @@ constexpr Vector<3, T> Quaternion<T>::ToEulerXYZ()
     T xz = this->x * z2;
     T yy = this->y * y2;
     T yz = this->y * z2;
-    T zz = this->y * z2;
+    T zz = this->z * z2;
     T wx = this->w * x2;
     T wy = this->w * y2;
     T wz = this->w * z2;
