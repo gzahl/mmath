@@ -42,13 +42,13 @@ public:
         T buf[4];
         struct
         {
-            T x, y, z, w;
+            T w, x, y, z;
         };
     };
 
     constexpr Quaternion();
     constexpr Quaternion(const Quaternion &v);
-    constexpr Quaternion(T x, T y, T z, T w);
+    constexpr Quaternion(T w, T x, T y, T z);
 
     constexpr Vector<3, T> ToEulerXYZ();
     constexpr void FromEulerXYZ(const Vector<3, T> &e);
@@ -61,20 +61,20 @@ constexpr Quaternion<T> operator*(const Quaternion<T> &q1, const Quaternion<T> &
 
 template <typename T>
 constexpr Quaternion<T>::Quaternion()
-    : x(0), y(0), z(0), w(1)
+    : w(1), x(0), y(0), z(0)
 {
 }
 
 template <typename T>
 constexpr Quaternion<T>::Quaternion(const Quaternion &v)
-    : x(v.x), y(v.y), z(v.z), w(v.w)
+    : w(v.w), x(v.x), y(v.y), z(v.z)
 {
 }
 
 
 template <typename T>
-constexpr Quaternion<T>::Quaternion(T x, T y, T z, T w)
-    : x(x), y(y), z(z), w(w)
+constexpr Quaternion<T>::Quaternion(T w, T x, T y, T z)
+    : w(w), x(x), y(y), z(z)
 {
 }
 
@@ -145,7 +145,7 @@ template <typename T>
 constexpr T Quaternion<T>::Dot(const Quaternion<T> &q)
 {
     Quaternion<T> qt = *this * q;
-    return qt.x + qt.y + qt.z + qt.w;
+    return qt.w + qt.x + qt.y + qt.z;
 }
 
 template <typename T>
@@ -157,7 +157,7 @@ constexpr T Quaternion<T>::Angle(const Quaternion<T> &q)
 template <typename T>
 constexpr Quaternion<T> operator*(const Quaternion<T> &q1, const Quaternion<T> &q2)
 {
-    return Quaternion<T>(q1.x * q2.x, q1.y * q2.y, q1.z * q2.z, q1.w * q2.w);
+    return Quaternion<T>(q1.w * q2.w, q1.x * q2.x, q1.y * q2.y, q1.z * q2.z);
 }
 
 using QuaternionF = Quaternion<float>;
