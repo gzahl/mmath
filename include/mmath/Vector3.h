@@ -57,6 +57,8 @@ public:
     template <typename U>
     constexpr Vector<3, T> &operator=(const Vector<3, U> &v);
     template <typename U>
+    constexpr Vector<3, T> &operator=(const U &scalar);
+    template <typename U>
     constexpr Vector<3, T> &operator+=(U scalar);
     template <typename U>
     constexpr Vector<3, T> &operator+=(const Vector<3, U> &v);
@@ -81,9 +83,11 @@ constexpr Vector<3, T> operator+(T scalar, const Vector<3, T> &v);
 template <typename T>
 constexpr Vector<3, T> operator+(const Vector<3, T> &v1, const Vector<3, T> &v2);
 template <typename T>
-constexpr Vector<3, T> operator-(const Vector<3, T> &v, T scalar);
+template <typename U>
+constexpr Vector<3, T> operator-(const Vector<3, T> &v, U scalar);
 template <typename T>
-constexpr Vector<3, T> operator-(T scalar, const Vector<3, T> &v);
+template <typename U>
+constexpr Vector<3, T> operator-(U scalar, const Vector<3, T> &v);
 template <typename T>
 constexpr Vector<3, T> operator-(const Vector<3, T> &v1, const Vector<3, T> &v2);
 template <typename T, typename U>
@@ -93,7 +97,8 @@ constexpr Vector<3, T> operator*(U scalar, const Vector<3, T> &v);
 template <typename T>
 constexpr Vector<3, T> operator*(const Vector<3, T> &v1, const Vector<3, T> &v2);
 template <typename T>
-constexpr Vector<3, T> operator/(const Vector<3, T> &v, T scalar);
+template <typename U>
+constexpr Vector<3, T> operator/(const Vector<3, T> &v, U scalar);
 template <typename T>
 constexpr Vector<3, T> operator/(T scalar, const Vector<3, T> &v);
 template <typename T>
@@ -152,6 +157,16 @@ constexpr Vector<3, T> &Vector<3, T>::operator=(const Vector<3, U> &v)
     this->x = static_cast<T>(v.x);
     this->y = static_cast<T>(v.y);
     this->z = static_cast<T>(v.z);
+    return *this;
+}
+
+template <typename T>
+template <typename U>
+constexpr Vector<3, T> &Vector<3, T>::operator=(const U &scalar)
+{
+    this->x = static_cast<U>(scalar);
+    this->y = static_cast<U>(scalar);
+    this->z = static_cast<U>(scalar);
     return *this;
 }
 
@@ -235,6 +250,17 @@ constexpr Vector<3, T> &Vector<3, T>::operator/=(const Vector<3, U> &v)
     return *this;
 }
 
+
+template <typename T>
+template <typename U>
+constexpr Vector<3, T> &Vector<3, T>::operator/(U v)
+{
+    this->x /= static_cast<T>(v);
+    this->y /= static_cast<T>(v);
+    this->z /= static_cast<T>(v);
+    return *this;
+}
+
 template <typename T>
 constexpr Vector<3, T> operator+(const Vector<3, T> &v, T scalar)
 {
@@ -254,13 +280,15 @@ constexpr Vector<3, T> operator+(const Vector<3, T> &v1, const Vector<3, T> &v2)
 }
 
 template <typename T>
-constexpr Vector<3, T> operator-(const Vector<3, T> &v, T scalar)
+template <typename U>
+constexpr Vector<3, T> operator-(const Vector<3, T> &v, U scalar)
 {
     return Vector<3, T>(v.x - scalar, v.y - scalar, v.z - scalar);
 }
 
 template <typename T>
-constexpr Vector<3, T> operator-(T scalar, const Vector<3, T> &v)
+template <typename U>
+constexpr Vector<3, T> operator-(U scalar, const Vector<3, T> &v)
 {
     return Vector<3, T>(scalar - v.x, scalar - v.y, scalar - v.z);
 }
@@ -290,7 +318,8 @@ constexpr Vector<3, T> operator*(const Vector<3, T> &v1, const Vector<3, T> &v2)
 }
 
 template <typename T>
-constexpr Vector<3, T> operator/(const Vector<3, T> &v, T scalar)
+template <typename U>
+constexpr Vector<3, T> operator/(const Vector<3, T> &v, U scalar)
 {
     return Vector<3, T>(v.x / scalar, v.y / scalar, v.z / scalar);
 }
