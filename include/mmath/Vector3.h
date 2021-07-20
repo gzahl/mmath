@@ -82,11 +82,9 @@ template <typename T>
 constexpr Vector<3, T> operator+(T scalar, const Vector<3, T> &v);
 template <typename T>
 constexpr Vector<3, T> operator+(const Vector<3, T> &v1, const Vector<3, T> &v2);
-template <typename T>
-template <typename U>
+template <typename T, typename U>
 constexpr Vector<3, T> operator-(const Vector<3, T> &v, U scalar);
-template <typename T>
-template <typename U>
+template <typename T, typename U>
 constexpr Vector<3, T> operator-(U scalar, const Vector<3, T> &v);
 template <typename T>
 constexpr Vector<3, T> operator-(const Vector<3, T> &v1, const Vector<3, T> &v2);
@@ -96,8 +94,7 @@ template <typename T, typename U>
 constexpr Vector<3, T> operator*(U scalar, const Vector<3, T> &v);
 template <typename T>
 constexpr Vector<3, T> operator*(const Vector<3, T> &v1, const Vector<3, T> &v2);
-template <typename T>
-template <typename U>
+template <typename T, typename U>
 constexpr Vector<3, T> operator/(const Vector<3, T> &v, U scalar);
 template <typename T>
 constexpr Vector<3, T> operator/(T scalar, const Vector<3, T> &v);
@@ -250,17 +247,6 @@ constexpr Vector<3, T> &Vector<3, T>::operator/=(const Vector<3, U> &v)
     return *this;
 }
 
-
-template <typename T>
-template <typename U>
-constexpr Vector<3, T> &Vector<3, T>::operator/(U v)
-{
-    this->x /= static_cast<T>(v);
-    this->y /= static_cast<T>(v);
-    this->z /= static_cast<T>(v);
-    return *this;
-}
-
 template <typename T>
 constexpr Vector<3, T> operator+(const Vector<3, T> &v, T scalar)
 {
@@ -279,15 +265,13 @@ constexpr Vector<3, T> operator+(const Vector<3, T> &v1, const Vector<3, T> &v2)
     return Vector<3, T>(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
 }
 
-template <typename T>
-template <typename U>
+template <typename T, typename U>
 constexpr Vector<3, T> operator-(const Vector<3, T> &v, U scalar)
 {
     return Vector<3, T>(v.x - scalar, v.y - scalar, v.z - scalar);
 }
 
-template <typename T>
-template <typename U>
+template <typename T, typename U>
 constexpr Vector<3, T> operator-(U scalar, const Vector<3, T> &v)
 {
     return Vector<3, T>(scalar - v.x, scalar - v.y, scalar - v.z);
@@ -317,8 +301,7 @@ constexpr Vector<3, T> operator*(const Vector<3, T> &v1, const Vector<3, T> &v2)
     return Vector<3, T>(v1.x * v2.x, v1.y * v2.y, v1.z * v2.z);
 }
 
-template <typename T>
-template <typename U>
+template <typename T, typename U>
 constexpr Vector<3, T> operator/(const Vector<3, T> &v, U scalar)
 {
     return Vector<3, T>(v.x / scalar, v.y / scalar, v.z / scalar);
